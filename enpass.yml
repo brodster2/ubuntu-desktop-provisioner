@@ -1,0 +1,17 @@
+---
+
+- name: Add Enpass apt key
+  apt_key:
+    url: https://apt.enpass.io/keys/enpass-linux.key
+    state: present
+
+- name: Add Enpass Repository
+  apt_repository:
+    repo: deb https://apt.enpass.io/ stable main
+    filename: enpass
+    state: present
+
+- name: Install Enpass
+  apt:
+    update_cache: yes
+    name: enpass
