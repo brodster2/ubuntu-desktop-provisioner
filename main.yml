@@ -1,17 +1,23 @@
 ---
 - hosts: localhost
   connection: local
-  become: yes
   become_user: root
   become_method: sudo
-
 
   tasks:
 
   - include_tasks: enpass.yml
+    vars:
+      ansible_become: true
   - include_tasks: brave.yml
+    vars:
+      ansible_become: true
+  - include_tasks: gnome-tweak-tool.yml
+    vars:
+      ansible_become: true
 
   - name: Install classic snaps
+    become: yes
     snap:
       name:
         - code
@@ -19,17 +25,18 @@
       channel: stable
 
   - name: Install apt packages
+    become: yes
     apt:
       name:
         - vim
         - resolvconf
 
   - name: install pip
+    become: yes
     apt:
      name: python3-pip
 
   - name: Install pip packages
-    become_user: brodie
     pip:
       name: pipenv
       extra_args: --user
@@ -41,6 +48,7 @@
       shell: /usr/bin/zsh
 
   - name: Set DNS servers
+    become: yes
     blockinfile:
       path: /etc/resolvconf/resolv.conf.d/head
       insertafter: EOF
@@ -49,6 +57,7 @@
         nameserver 8.8.4.4
   
   - name: Reload resolvconf.service
+    become: yes
     systemd:
       name: resolvconf.service
       state: restarted
@@ -56,12 +65,12 @@
 
   roles:
     - role: geerlingguy.docker
+      become: yes
       vars:
         docker_apt_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable" # Setting to eoan until focal is supported
         docker_users:
           - brodie
     - role: gantsign.oh-my-zsh
-      become: no
       users:
         - username: brodie
           oh_my_zsh:
