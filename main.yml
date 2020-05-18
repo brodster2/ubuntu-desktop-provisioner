@@ -15,6 +15,9 @@
   - include_tasks: gnome-tweak-tool.yml
     vars:
       ansible_become: true
+  - include_tasks: golang.yml
+    vars:
+      ansible_become: true
 
   - name: Install classic snaps
     become: yes

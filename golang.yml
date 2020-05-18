@@ -1,0 +1,16 @@
+---
+- name: Install golang
+  unarchive:
+    src: https://dl.google.com/go/go1.14.3.linux-amd64.tar.gz
+    dest: /usr/local
+    remote_src: yes
+
+- name: Set GOPATH
+  become: yes
+  become_user: '{{ ansible_user_id }}'
+  blockinfile:
+    path: '{{ ansible_user_dir }}/.zshrc'
+    insertbefore: '# Path to your oh-my-zsh installation.'
+    block: |
+      # Set GOPTH
+      export PATH=$PATH:/usr/local/go/bin

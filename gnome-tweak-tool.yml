@@ -1,0 +1,10 @@
+---
+- name: Add universe apt repo
+  apt_repository:
+      repo: "deb http://archive.ubuntu.com/ubuntu {{ansible_distribution_release}} universe"
+      state: present
+      update_cache: yes
+
+- name: Install gnome tweak tool
+  apt:
+    name: gnome-tweak-tool
