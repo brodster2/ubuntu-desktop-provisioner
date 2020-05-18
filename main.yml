@@ -73,6 +73,7 @@
         docker_apt_repository: "deb [arch=amd64] https://download.docker.com/linux/ubuntu eoan stable" # Setting to eoan until focal is supported
         docker_users:
           - brodie
+
     - role: gantsign.oh-my-zsh
       users:
         - username: brodie
