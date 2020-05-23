@@ -13,4 +13,4 @@
     insertbefore: '# Path to your oh-my-zsh installation.'
     block: |
       # Set GOPTH
-      export PATH=$PATH:/usr/local/go/bin
+      export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
