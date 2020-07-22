@@ -11,3 +11,8 @@
   args:
     chdir: ~/Downloads
     creates: ~/.local/aws-cli
+
+- name: Cleanup
+  file:
+    path: ~/Downloads/aws
+    state: absent
