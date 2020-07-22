@@ -1,0 +1,13 @@
+---
+
+- name: Unzip cli package
+  unarchive:
+    dest: ~/Downloads
+    src: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip
+    remote_src: yes
+
+- name: Run installer
+  shell: ./aws/install -i ~/.local/aws-cli -b ~/.local/bin
+  args:
+    chdir: ~/Downloads
+    creates: ~/.local/aws-cli

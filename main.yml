@@ -18,6 +18,7 @@
   - include_tasks: golang.yml
     vars:
       ansible_become: true
+  - include_tasks: awscliv2.yml
 
   - name: Install classic snaps
     become: yes
